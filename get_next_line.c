@@ -6,6 +6,14 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 22:54:45 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/02 22:54:47 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/02 23:05:39 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
+
+char	*get_next_line(int fd)
+{
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (NULL);
+}
