@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 23:01:06 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/04 18:36:23 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/06 18:01:59 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
+#  define BUFFER_SIZE 10
 # endif
 
 typedef struct s_list
@@ -29,5 +29,7 @@ typedef struct s_list
 }					t_list;
 
 char				*get_next_line(int fd);
+static t_list		*read_to_stash(int fd, t_list *stash);
+char				*extract_line(t_list *stash);
 
 #endif
