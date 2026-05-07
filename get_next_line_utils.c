@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 16:52:43 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/06 17:02:47 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/07 22:16:37 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,31 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	}
 	newstr[i] = '\0';
 	return (newstr);
+}
+
+t_list	*find_last_node(t_list *list)
+{
+	if (NULL == list)
+		return (NULL);
+	while (list->next)
+		list = list->next;
+	return (list);
+}
+
+int	found_newline(t_list *list)
+{
+	size_t	i;
+
+	while (list)
+	{
+		i = 0;
+		while (list->str_buf[i])
+		{
+			if (list->str_buf[i] == '\n')
+				return (1);
+			i++;
+		}
+		list = list->next;
+	}
+	return (0);
 }
