@@ -6,65 +6,52 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 16:52:43 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/07 22:16:37 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/08 21:01:37 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+static size_t	line_len(t_list *list)
 {
 	size_t	len;
+	size_t	i;
 
 	len = 0;
-	while (s[len])
-		len++;
+	while (list)
+	{
+		i = 0;
+		while (list->str_buf[i] && list->str_buf[i] != '\n')
+		{
+			len++;
+			i++;
+		}
+		if (list->str_buf[i] == '\n')
+			return (len + 1);
+		list = list->next;
+	}
 	return (len);
 }
 
-char	*ft_strchr(const char *s, int c)
+static void	copy_line(char *line, t_list *list)
 {
-	while (*s)
-	{
-		if (*s == (char)c)
-		{
-			return ((char *)s);
-		}
-		s++;
-	}
-	if ((char)c == '\0')
-	{
-		return ((char *)s);
-	}
-	return (NULL);
-}
-
-char	*ft_strjoin(const char *s1, const char *s2)
-{
-	size_t	len1;
-	size_t	len2;
-	char	*newstr;
 	size_t	i;
 	size_t	j;
 
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
 	i = 0;
-	j = 0;
-	newstr = malloc(len1 + len2 + 1);
-	if (!newstr)
-		return (NULL);
-	while (i < len1)
+	while (list)
 	{
-		newstr[i] = s1[i];
-		i++;
+		j = 0;
+		while (list->str_buf[j] && list->str_buf[j] != '\n')
+			line[i++] = list->str_buf[j++];
+		if (list->str_buf[j] == '\n')
+		{
+			line[i++] = '\n';
+			break ;
+		}
+		list = list->next;
 	}
-	while (j < len2)
-	{
-		newstr[i++] = s2[j++];
-	}
-	newstr[i] = '\0';
-	return (newstr);
+	line[i] = '\0';
 }
 
 t_list	*find_last_node(t_list *list)

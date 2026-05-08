@@ -6,11 +6,14 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 22:54:45 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/07 22:18:54 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/08 21:04:51 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+// TODOfreelist
+// TODO trimlist
 
 // append_node(list, buffer, bytes_read)
 // Agrega un nodo al final.
@@ -45,6 +48,21 @@ list_trim
 [ "Co" ]
 	↓
 return line*/
+
+char	*extract_line(t_list *list)
+{
+	char	*line;
+	size_t	len;
+
+	if (!list)
+		return (NULL);
+	len = line_len(list);
+	line = malloc(len + 1);
+	if (!line)
+		return (NULL);
+	copy_line(line, list);
+	return (line);
+}
 
 t_list	*append_node(t_list *list, char *buf, ssize_t bytes_read)
 {
@@ -103,7 +121,6 @@ t_list	*read_to_list(int fd, t_list *list)
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 	{
-		// TODO free list
 		free_list(list);
 		return (NULL);
 	}
@@ -113,9 +130,7 @@ t_list	*read_to_list(int fd, t_list *list)
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
 		{
-			free(buffer);
-			free_list(list);
-			return (NULL);
+			return (free(buffer), free_list(list), NULL);
 		}
 		if (bytes_read == 0)
 			break ;
@@ -134,11 +149,8 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	list = read_to_list(fd, list);
-	if (list == NULL)
-	{
+	if (!list)
 		return (NULL);
-	}
-	/*TODO Construir la línea completa recorriendo la lista */
 	line = extract_line(list);
 	if (!line)
 	{
@@ -146,7 +158,6 @@ char	*get_next_line(int fd)
 		list = NULL;
 		return (NULL);
 	}
-	/*TODO Recortar la lista dejando solo lo que sobra */
 	list = list_trim(list);
 	return (line);
 }
