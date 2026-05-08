@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 23:01:06 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/08 21:01:48 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/08 22:02:52 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,5 @@ typedef struct s_list
 }					t_list;
 
 char				*get_next_line(int fd);
-static t_list		*read_to_list(int fd, t_list *list);
-char				*extract_line(t_list *list);
-t_list				*find_last_node(t_list *list);
-int					found_newline(t_list *list);
 
 #endif
