@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 23:01:06 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/08 22:02:52 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/08 23:31:01 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 2048;
 # endif
 
 typedef struct s_list
 {
-	char			*str_buf;
+	char			*content;
 	struct s_list	*next;
 }					t_list;
 

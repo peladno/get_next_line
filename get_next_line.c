@@ -5,9 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/02 22:54:45 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/08 22:02:44 by jperez-u         ###   ########.fr       */
+/*   Created: 2026/05/08 23:17:54 by jperez-u          #+#    #+#             */
+/*   Updated: 2026/05/08 23:31:07 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*get_next_line(int fd)
+{
+	static char	*List = NULL;
+    
+}
