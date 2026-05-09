@@ -6,32 +6,28 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 21:58:18 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/08 22:03:07 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/09 17:57:06 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
+
+/*cc -Wall -Wextra -Werror -D BUFFER_SIZE=10 \
+get_next_line.c get_next_line_utils.c main.c -o gnl*/
 
 #include "get_next_line.h"
 
 int	main(void)
 {
 	int fd;
-	char *line;
+	char *result;
 
 	fd = open("test.txt", O_RDONLY);
 	if (fd < 0)
-	{
-		printf("Error opening file\n");
 		return (1);
-	}
-
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		printf("%s", line);
-		free(line);
-		line = get_next_line(fd);
-	}
-
+	result = get_next_line(fd);
+	printf("RESULT:\n%s\n", result);
+	free(result);
 	close(fd);
 	return (0);
 }

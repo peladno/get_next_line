@@ -6,3 +6,4 @@
 - https://github.com/jdecorte-be/get-next-line/tree/master
 - https://www.educative.io/answers/how-to-read-data-from-a-file-using-the-fread-function-in-c
 - https://www.geeksforgeeks.org/c/static-variables-in-c/
+- https://medium.com/@lannur-s/gnl-c3cff1ee552b
