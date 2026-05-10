@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 23:17:54 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/10 21:21:16 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/10 22:31:31 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,29 @@ char	*extract_line(t_list *list)
 
 void	clean_list(t_list **list)
 {
+	size_t	i;
+	size_t	j;
+	char	*buff;
+	t_list	*last_node;
+	t_list	*leftover_node;
+
+	buff = malloc(BUFFER_SIZE + 1);
+	leftover_node = malloc(sizeof(t_list));
+	if (!buff || !leftover_node)
+		return ;
+	last_node = ft_listlast(*list);
+	i = 0;
+	while (last_node->content[i] && last_node->content[i] != '\n')
+		i++;
+	if (last_node->content[i] == '\n')
+		i++;
+	j = 0;
+	while (last_node->content[i])
+		buff[j++] = last_node->content[i++];
+	buff[j] = '\0';
+	leftover_node->content = buff;
+	leftover_node->next = NULL;
+	free_mem(list, leftover_node, buff); // TODO free_mem
 }
 
 char	*get_next_line(int fd)

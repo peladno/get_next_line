@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 23:01:06 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/10 20:46:44 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/10 22:06:01 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_list
 }					t_list;
 
 char				*get_next_line(int fd);
-size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s1);
 int					found_newline(t_list *list);
 size_t				len_size(t_list *lst);
