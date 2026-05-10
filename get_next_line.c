@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 23:17:54 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/10 18:55:20 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/10 20:49:06 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 // 4. read_to_list(fd, &list)✅
 //    reads until '\n' or EOF
 
-// 5. extract_line(list)
+// 5. extract_line(list)✅
 //    creates the final line to return
 
 // 6. clean_list(&list)
@@ -50,21 +50,8 @@ void	append_node(t_list **list, char *buffer)
 		*list = new_node;
 		return ;
 	}
-	last_node = *list;
-	while (last_node->next) // TODO if I have space in .h refactor code
-		last_node = last_node->next;
+	last_node = ft_listlast(*list);
 	last_node->next = new_node;
-}
-
-int	found_newline(t_list *list)
-{
-	while (list)
-	{
-		if (ft_strchr(list->content, '\n'))
-			return (1);
-		list = list->next;
-	}
-	return (0);
 }
 
 void	read_to_list(int fd, t_list **list)
@@ -88,6 +75,34 @@ void	read_to_list(int fd, t_list **list)
 	free(buffer);
 }
 
+char	*extract_line(t_list *list)
+{
+	char	*line;
+	char	*str;
+	size_t	j;
+
+	if (!list)
+		return (NULL);
+	line = malloc(sizeof(char) * (len_size(list) + 1));
+	if (!line)
+		return (NULL);
+	j = 0;
+	while (list)
+	{
+		str = list->content;
+		while (*str)
+		{
+			line[j++] = *str;
+			if (*str == '\n')
+				break ;
+			str++;
+		}
+		list = list->next;
+	}
+	line[j] = '\0';
+	return (line);
+}
+
 char	*get_next_line(int fd)
 {
 	char			*line;
@@ -96,10 +111,10 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || read(fd, NULL, 0) < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	read_to_list(fd, &list); // ✅
+	read_to_list(fd, &list);
 	if (!list)
 		return (NULL);
-	line = extract_line(list); // TODO
-	clean_list(&list);         // TODO
+	line = extract_line(list);
+	clean_list(&list); // TODO
 	return (line);
 }

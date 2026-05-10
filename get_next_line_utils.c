@@ -6,26 +6,11 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 16:52:43 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/10 18:39:12 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/10 20:52:49 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char	*ft_strchr(const char *s, int c)
-{
-	if (!s)
-		return (NULL);
-	while (*s)
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
-	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
-}
 
 size_t	ft_strlen(const char *s)
 {
@@ -37,33 +22,6 @@ size_t	ft_strlen(const char *s)
 	while (s[len])
 		len++;
 	return (len);
-}
-char	*ft_strjoin(const char *s1, const char *s2)
-{
-	size_t	len1;
-	size_t	len2;
-	char	*newstr;
-	size_t	i;
-	size_t	j;
-
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	i = 0;
-	j = 0;
-	newstr = malloc(len1 + len2 + 1);
-	if (!newstr)
-		return (NULL);
-	while (i < len1)
-	{
-		newstr[i] = s1[i];
-		i++;
-	}
-	while (j < len2)
-	{
-		newstr[i++] = s2[j++];
-	}
-	newstr[i] = '\0';
-	return (newstr);
 }
 
 char	*ft_strdup(const char *s1)
@@ -87,4 +45,49 @@ char	*ft_strdup(const char *s1)
 	}
 	arr[i] = '\0';
 	return (arr);
+}
+
+int	found_newline(t_list *list)
+{
+	while (list)
+	{
+		if (ft_strchr(list->content, '\n'))
+			return (1);
+		list = list->next;
+	}
+	return (0);
+}
+
+size_t	len_size(t_list *list)
+{
+	size_t	len;
+	size_t	i;
+	t_list	*current;
+
+	len = 0;
+	if (!list)
+		return (len);
+	current = list;
+	while (current)
+	{
+		i = 0;
+		while (current->content[i])
+		{
+			len++;
+			if (current->content[len] == '\n')
+				return (len);
+			i++;
+		}
+		current = current->next;
+	}
+	return (len);
+}
+
+t_list	*ft_listlast(t_list *list)
+{
+	if (!list)
+		return (NULL);
+	while (list->next)
+		list = list->next;
+	return (list);
 }
