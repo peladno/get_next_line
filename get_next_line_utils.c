@@ -6,34 +6,23 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 16:52:43 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/10 20:52:49 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/10 22:03:04 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	if (!s)
-		return (0);
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
-}
-
 char	*ft_strdup(const char *s1)
 {
-	int		len;
+	size_t	len;
 	int		i;
 	char	*arr;
 
-	// CHECK I need to check null??
 	if (!s1)
 		return (NULL);
-	len = ft_strlen(s1);
+	len = 0;
+	while (s1[len])
+		len++;
 	arr = malloc(sizeof(char) * (len + 1));
 	if (!arr)
 		return (NULL);
@@ -49,10 +38,17 @@ char	*ft_strdup(const char *s1)
 
 int	found_newline(t_list *list)
 {
+	char	*str;
+
 	while (list)
 	{
-		if (ft_strchr(list->content, '\n'))
-			return (1);
+		str = list->content;
+		while (*str)
+		{
+			if (*str == '\n')
+				return (1);
+			str++;
+		}
 		list = list->next;
 	}
 	return (0);

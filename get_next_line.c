@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 23:17:54 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/10 20:49:06 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/10 21:21:16 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,10 @@ char	*extract_line(t_list *list)
 	}
 	line[j] = '\0';
 	return (line);
+}
+
+void	clean_list(t_list **list)
+{
 }
 
 char	*get_next_line(int fd)
