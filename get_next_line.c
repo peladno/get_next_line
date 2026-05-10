@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 23:17:54 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/10 16:37:11 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/10 18:55:20 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 // 1. find_newline(list)✅
 //    checks if any node has '\n'
 
-// 2. find_last_node(list)
+// 2. find_last_node(list) ✅
 //    returns the last node
 
-// 3. append_node(&list, buffer)
+// 3. append_node(&list, buffer) ✅
 //    creates a node and adds it to the end
 
 // 4. read_to_list(fd, &list)✅
@@ -29,6 +29,32 @@
 
 // 6. clean_list(&list)
 //    removes used data and keeps leftover
+
+void	append_node(t_list **list, char *buffer)
+{
+	t_list	*new_node;
+	t_list	*last_node;
+
+	new_node = malloc(sizeof(t_list));
+	if (!new_node)
+		return ;
+	new_node->content = ft_strdup(buffer);
+	if (!new_node->content)
+	{
+		free(new_node);
+		return ;
+	}
+	new_node->next = NULL;
+	if (!*list)
+	{
+		*list = new_node;
+		return ;
+	}
+	last_node = *list;
+	while (last_node->next) // TODO if I have space in .h refactor code
+		last_node = last_node->next;
+	last_node->next = new_node;
+}
 
 int	found_newline(t_list *list)
 {
@@ -56,7 +82,7 @@ void	read_to_list(int fd, t_list **list)
 		if (read_bytes > 0)
 		{
 			buffer[read_bytes] = '\0';
-			append_node(list, buffer); // TODO
+			append_node(list, buffer);
 		}
 	}
 	free(buffer);

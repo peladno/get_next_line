@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 16:52:43 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/09 17:21:05 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/10 18:39:12 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,27 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	}
 	newstr[i] = '\0';
 	return (newstr);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	int		len;
+	int		i;
+	char	*arr;
+
+	// CHECK I need to check null??
+	if (!s1)
+		return (NULL);
+	len = ft_strlen(s1);
+	arr = malloc(sizeof(char) * (len + 1));
+	if (!arr)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		arr[i] = s1[i];
+		i++;
+	}
+	arr[i] = '\0';
+	return (arr);
 }

@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 23:01:06 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/09 17:06:05 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/10 18:40:24 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ char				*get_next_line(int fd);
 char				*ft_strchr(const char *s, int c);
 size_t				ft_strlen(const char *s);
 char				*ft_strjoin(const char *s1, const char *s2);
-
+char				*ft_strdup(const char *s1);
 #endif
