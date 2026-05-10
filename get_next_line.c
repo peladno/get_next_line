@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 23:17:54 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/09 18:48:10 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/10 16:37:11 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ char	*get_next_line(int fd)
 {
 	char			*line;
 	static t_list	*list;
+	static char		*List = NULL;
 
 	if (fd < 0 || read(fd, NULL, 0) < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
