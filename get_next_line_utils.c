@@ -88,6 +88,23 @@ t_list	*ft_listlast(t_list *list)
 	return (list);
 }
 
-void free_mem(list, leftover_node, buff){
+void	free_mem(t_list **list, t_list *leftover_node, char *buf)
+{
+	t_list	*tmp;
 
+	while (*list)
+	{
+		tmp = (*list)->next;
+		free((*list)->content);
+		free(*list);
+		*list = tmp;
+	}
+	if (*buf)
+		*list = leftover_node;
+	else
+	{
+		free(buf);
+		free(leftover_node);
+		*list = NULL;
+	}
 }

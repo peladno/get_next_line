@@ -12,24 +12,6 @@
 
 #include "get_next_line.h"
 
-// 1. find_newline(list)✅
-//    checks if any node has '\n'
-
-// 2. find_last_node(list) ✅
-//    returns the last node
-
-// 3. append_node(&list, buffer) ✅
-//    creates a node and adds it to the end
-
-// 4. read_to_list(fd, &list)✅
-//    reads until '\n' or EOF
-
-// 5. extract_line(list)✅
-//    creates the final line to return
-
-// 6. clean_list(&list)
-//    removes used data and keeps leftover
-
 void	append_node(t_list **list, char *buffer)
 {
 	t_list	*new_node;
@@ -127,7 +109,7 @@ void	clean_list(t_list **list)
 	buff[j] = '\0';
 	leftover_node->content = buff;
 	leftover_node->next = NULL;
-	free_mem(list, leftover_node, buff); // TODO free_mem
+	free_mem(list, leftover_node, buff); 
 }
 
 char	*get_next_line(int fd)
@@ -142,6 +124,6 @@ char	*get_next_line(int fd)
 	if (!list)
 		return (NULL);
 	line = extract_line(list);
-	clean_list(&list); // TODO
+	clean_list(&list); 
 	return (line);
 }
