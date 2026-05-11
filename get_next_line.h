@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 23:01:06 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/10 22:06:01 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/11 20:25:12 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ char				*ft_strdup(const char *s1);
 int					found_newline(t_list *list);
 size_t				len_size(t_list *lst);
 t_list				*ft_listlast(t_list *list);
-void				free_mem(list, leftover_node, buff);
+void				free_mem(t_list **list, t_list *leftover_node, char *buf);
+
 #endif

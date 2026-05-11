@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 23:17:54 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/10 22:41:21 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/11 21:42:33 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,51 @@ void	append_node(t_list **list, char *buffer)
 	last_node->next = new_node;
 }
 
+// void	read_to_list(int fd, t_list **list)
+// {
+// 	char	*buffer;
+// 	int		read_bytes;
+
+// 	buffer = malloc(BUFFER_SIZE + 1);
+// 	if (!buffer)
+// 		return ;
+// 	read_bytes = 1;
+// 	while (!found_newline(*list) && read_bytes > 0)
+// 	{
+// 		read_bytes = read(fd, buffer, BUFFER_SIZE);
+// 		if (read_bytes > 0)
+// 		{
+// 			buffer[read_bytes] = '\0';
+// 			append_node(list, buffer);
+// 		}
+// 	}
+// 	free(buffer);
+// }
+
 void	read_to_list(int fd, t_list **list)
 {
 	char	*buffer;
 	int		read_bytes;
+	int		i;
 
+	if (found_newline(*list))
+		return ;
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return ;
 	read_bytes = 1;
-	while (!found_newline(*list) && read_bytes > 0)
+	while (read_bytes > 0)
 	{
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (read_bytes > 0)
-		{
-			buffer[read_bytes] = '\0';
-			append_node(list, buffer);
-		}
+		if (read_bytes <= 0)
+			break ;
+		buffer[read_bytes] = '\0';
+		append_node(list, buffer);
+		i = 0;
+		while (buffer[i] && buffer[i] != '\n')
+			i++;
+		if (buffer[i] == '\n')
+			break ;
 	}
 	free(buffer);
 }
@@ -61,27 +89,27 @@ char	*extract_line(t_list *list)
 {
 	char	*line;
 	char	*str;
-	size_t	j;
+	size_t	i;
 
 	if (!list)
 		return (NULL);
 	line = malloc(sizeof(char) * (len_size(list) + 1));
 	if (!line)
 		return (NULL);
-	j = 0;
+	i = 0;
 	while (list)
 	{
 		str = list->content;
 		while (*str)
 		{
-			line[j++] = *str;
+			line[i++] = *str;
 			if (*str == '\n')
 				break ;
 			str++;
 		}
 		list = list->next;
 	}
-	line[j] = '\0';
+	line[i] = '\0';
 	return (line);
 }
 
@@ -109,14 +137,13 @@ void	clean_list(t_list **list)
 	buff[j] = '\0';
 	leftover_node->content = buff;
 	leftover_node->next = NULL;
-	free_mem(list, leftover_node, buff); 
+	free_mem(list, leftover_node, buff);
 }
 
 char	*get_next_line(int fd)
 {
 	char			*line;
-	static t_list	*list;
-	static char		*List = NULL;
+	static t_list	*list = NULL;
 
 	if (fd < 0 || read(fd, NULL, 0) < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -124,6 +151,6 @@ char	*get_next_line(int fd)
 	if (!list)
 		return (NULL);
 	line = extract_line(list);
-	clean_list(&list); 
+	clean_list(&list);
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 16:52:43 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/10 22:03:04 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/11 20:40:25 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ size_t	len_size(t_list *list)
 
 	len = 0;
 	if (!list)
-		return (len);
+		return (0);
 	current = list;
 	while (current)
 	{
@@ -70,7 +70,7 @@ size_t	len_size(t_list *list)
 		while (current->content[i])
 		{
 			len++;
-			if (current->content[len] == '\n')
+			if (current->content[i] == '\n')
 				return (len);
 			i++;
 		}
