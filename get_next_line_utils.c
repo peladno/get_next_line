@@ -87,3 +87,7 @@ t_list	*ft_listlast(t_list *list)
 		list = list->next;
 	return (list);
 }
+
+void free_mem(list, leftover_node, buff){
+
+}

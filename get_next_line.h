@@ -33,4 +33,6 @@ char				*ft_strdup(const char *s1);
 int					found_newline(t_list *list);
 size_t				len_size(t_list *lst);
 t_list				*ft_listlast(t_list *list);
+void free_mem(list, leftover_node, buff);
+
 #endif
