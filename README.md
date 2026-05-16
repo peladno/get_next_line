@@ -126,6 +126,10 @@ Remaining list:
 
 ---
 
+## Disclosure AI
+
+This readme is made by AI.
+
 # Resources
 
 ## Tutorials and References
