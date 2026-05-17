@@ -6,7 +6,7 @@
 /*   By: jperez-u <jperez-u@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 23:17:54 by jperez-u          #+#    #+#             */
-/*   Updated: 2026/05/11 21:42:33 by jperez-u         ###   ########.fr       */
+/*   Updated: 2026/05/17 16:17:53 by jperez-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,6 @@ void	append_node(t_list **list, char *buffer)
 	last_node = ft_listlast(*list);
 	last_node->next = new_node;
 }
-
-// void	read_to_list(int fd, t_list **list)
-// {
-// 	char	*buffer;
-// 	int		read_bytes;
-
-// 	buffer = malloc(BUFFER_SIZE + 1);
-// 	if (!buffer)
-// 		return ;
-// 	read_bytes = 1;
-// 	while (!found_newline(*list) && read_bytes > 0)
-// 	{
-// 		read_bytes = read(fd, buffer, BUFFER_SIZE);
-// 		if (read_bytes > 0)
-// 		{
-// 			buffer[read_bytes] = '\0';
-// 			append_node(list, buffer);
-// 		}
-// 	}
-// 	free(buffer);
-// }
 
 void	read_to_list(int fd, t_list **list)
 {
@@ -153,4 +132,15 @@ char	*get_next_line(int fd)
 	line = extract_line(list);
 	clean_list(&list);
 	return (line);
+}
+
+int	main(void)
+{
+	t_list *list;
+
+	list = NULL;
+	append_node(list, "Hola ");
+	append_node(list, "mundo\n");
+	free_list(list);
+	return (0);
 }
